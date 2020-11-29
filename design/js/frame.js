@@ -14,18 +14,18 @@ function frameInit() {
         app.popup.show = false;
         app.cardPopup.show = false;
     });
-
-    for (var i = 0; i < 10; i++) {
-
-        pushShape({
-            left: i * 3 * 10,
-            top: i * 3 * 10,
-            width: 100,
-            height: 20,
-            value: new Date().getTime(),
-            type: 0,
-        })
-    }
+    //注释掉初始的 shape
+    // for (var i = 0; i < 10; i++) {
+    //
+    //     pushShape({
+    //         left: i * 3 * 10,
+    //         top: i * 3 * 10,
+    //         width: 100,
+    //         height: 20,
+    //         value: new Date().getTime(),
+    //         type: 0,
+    //     })
+    // }
 
 }
 
@@ -118,6 +118,7 @@ function initSelectArea() {
 }
 
 function initDrag() {
+    // Vue.rem = rem;
 
     Vue.directive('drag', {
         inserted(dv, binding) {
@@ -402,7 +403,7 @@ function initApp() {
 
                 //默认图片
                 if (type == 1) {
-                    value = './design/images/image.jpg';
+                    value = 'http://img.itshare.club/20200915222524.png';
                     width = 120;
                     height = 120;
                 }
@@ -414,7 +415,8 @@ function initApp() {
                     height: height,
                     value: value,
                     type: type,
-                    active: true
+                    active: true,
+                    borderWidth:1
                 };
                 app.selectShape(null, data);
                 pushShape(data)
@@ -456,3 +458,10 @@ function getSize() {
         height: document.documentElement.clientHeight || document.body.clientHeight
     };
 }
+
+
+
+function rem(value) {
+    return (value/100)*2;
+}
+

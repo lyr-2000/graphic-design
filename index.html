@@ -6,8 +6,19 @@
     <link rel='stylesheet' href='./design/css/style.css'/>
     <link rel='stylesheet' href='./design/css/resize.css'/>
     <meta charset="UTF-8"/>
+	<style>
+		#xxxxx{
+			width: 100rem;
+			height: 122rem;
+			border: 1px solid black;
+			
+		}
+	</style>
 </head>
 <body>
+
+
+
 
 <div id="app" :style="{height:layout.height+'px'}">
     <div class="left"
@@ -25,24 +36,50 @@
             <div class="item">
                 <div class="key">宽度：</div>
                 <div class="value">
-                    <input type="input" v-model="card.width" placeholder="宽度"/>
+                    <input type="input" v-model="card.width" placeholder="宽度"/>px
                 </div>
             </div>
             <div class="item">
                 <div class="key">高度：</div>
                 <div class="value">
-                    <input type="input" v-model="card.height" placeholder="宽度"/>
+                    <input type="input" v-model="card.height" placeholder="宽度"/>px
                 </div>
             </div>
 
             <div class="item">
-                <div class="key">背景：</div>
+                <div class="key">宽度：</div>
                 <div class="value">
-                    <div class="image-box">
-                        <span class="tips">点击上传</span>
-                    </div>
+                    <input type="input" :value="card.width*0.02" placeholder="宽度"/>rem
                 </div>
             </div>
+            <div class="item">
+                <div class="key">高度：</div>
+                <div class="value">
+                    <input type="input" :value="card.height*0.02" placeholder="宽度"/>rem
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="key">宽度：</div>
+                <div class="value">
+                    <input type="input" :value="card.width*2" placeholder="宽度"/>rpx
+                </div>
+            </div>
+            <div class="item">
+                <div class="key">高度：</div>
+                <div class="value">
+                    <input type="input" :value="card.height*2" placeholder="宽度"/>rpx
+                </div>
+            </div>
+
+<!--            <div class="item">-->
+<!--                <div class="key">背景：</div>-->
+<!--                <div class="value">-->
+<!--                    <div class="image-box">-->
+<!--                        <span class="tips">点击上传</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
         </div>
 
 
@@ -81,6 +118,7 @@
         </div>
 
     </div>
+	<!-- 中间元素 -->
     <div class="center"
          :style="{width:layout.center+'px',height:(layout.height-22)+'px','margin-right':layout.margin+'px'}">
 
@@ -119,6 +157,21 @@
                 </div>
 
                 <div class="item">
+                    <div class="key">width</div>
+                    <div class="value">
+                        <input type="number" :value="(selected.width/100)*2" placeholder="宽度rem"/>
+                        <span>rem</span>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="key">height：</div>
+                    <div class="value">
+                        <input type="number" :value="(selected.height/100)*2" placeholder="高度rem"/>
+                        <span>rem</span>
+                    </div>
+                </div>
+
+                <div class="item">
                     <div class="key">类型：</div>
                     <div class="value">
                         <select v-model="selected.type">
@@ -149,13 +202,25 @@
                 <div class="item">
                     <div class="key">X：</div>
                     <div class="value">
-                        <input type="number" v-model="selected.left"/>
+                        <input type="number" v-model="selected.left"/>px
                     </div>
                 </div>
                 <div class="item">
                     <div class="key">Y：</div>
                     <div class="value">
-                        <input type="number" v-model="selected.top"/>
+                        <input type="number" v-model="selected.top"/>px
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="key">X：</div>
+                    <div class="value">
+                        <input type="number" :value="(selected.left/100)*2"/>rem
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="key">Y：</div>
+                    <div class="value">
+                        <input type="number" :value="(selected.top/100)*2"/>rem
                     </div>
                 </div>
             </div>
@@ -188,7 +253,10 @@
                 <div class="item">
                     <div class="key">大小：</div>
                     <div class="value">
-                        <input type="number" v-model="selected.fontSize" placeholder="大小"/>
+                        <input type="number" v-model="selected.fontSize" placeholder="大小"/>px
+                    </div>
+                    <div class="value">
+                        <input type="number" :value="selected.fontSize*0.02" placeholder="大小"/>rem
                     </div>
                 </div>
                 <div class="item">
@@ -200,6 +268,45 @@
                         </select>
                     </div>
                 </div>
+				
+				<div class="item">
+				    <div class="key">border-radius：</div>
+				    <div class="value">
+				        <input type="number" v-model="selected.borderRadius" placeholder="大小"/>px
+				    </div>
+				    <div class="value">
+				        <input type="number" :value="selected.borderRadius*0.02" placeholder="大小"/>rem
+				    </div>
+				</div>
+
+
+            </div>
+
+            <div class="pro-box">
+                <div class="title">tips</div>
+                <div class="item">
+					<div class="key">rem 布局方式</div>
+                    <div class="value">
+                        <div>
+                             rem 布局换算方式:
+                            将移动端 的 font-size 设置成 50px
+                            然后 设计稿的 px /100 再乘以2 ，就是 rem的结果
+
+                            比如 43px ----> 转成 .86rem
+                        </div>
+                    </div>
+                </div>
+				<div class="title">样式代码</div>
+				<div class="value" style="user-select:text;" v-if="selected.width">
+					#xxxxx{<br/>
+					&nbsp;&nbsp;width: {{ (selected.width/100)*2 }}rem; <br/>
+					&nbsp;&nbsp;height: {{ selected.height*0.02 }}rem; <br />
+					&nbsp;&nbsp;border: 1px solid black; <br/>
+						
+					}
+					<br>
+					<br>
+				</div>
             </div>
         </div>
     </div>

@@ -254,3 +254,8 @@ a {
     color: #666;
     line-height: 80px;
 }
+
+
+.left,.right{
+    border-radius: 8px;
+}
